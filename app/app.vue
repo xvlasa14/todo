@@ -7,8 +7,15 @@ const data = ref(tasksData);
 const plannedOnly = ref(false);
 
 const isModalOpen = ref(false);
-const newTaskTitle = ref('')
-const newTaskPriority = ref('normal')
+const newTaskTemplate = ref(false);
+const newTaskTitle = ref("");
+const newTaskPriority = ref("normal");
+
+const priorityOrder = {
+  high: 3,
+  normal: 2,
+  low: 1,
+};
 
 const tasks = computed(() => {
   let result = [...data.value];
@@ -21,13 +28,6 @@ const tasks = computed(() => {
     if (a.status !== b.status) {
       return a.status === "planned" ? -1 : 1;
     }
-
-    const priorityOrder = {
-      high: 3,
-      normal: 2,
-      low: 1,
-    };
-
     return priorityOrder[b.priority] - priorityOrder[a.priority];
   });
 });
@@ -44,20 +44,20 @@ const deleteTask = (id) => {
 };
 
 const addTask = () => {
-  if (!newTaskTitle.value.trim()) return
+  if (!newTaskTitle.value.trim()) return;
 
   data.value.push({
     id: Date.now(),
     title: newTaskTitle.value,
-    status: 'planned',
-    priority: newTaskPriority.value
-  })
+    status: "planned",
+    priority: newTaskPriority.value,
+  });
 
-  newTaskTitle.value = ''
-  newTaskPriority.value = 'normal'
+  newTaskTitle.value = "";
+  newTaskPriority.value = "normal";
 
-  isModalOpen.value = false
-}
+  isModalOpen.value = false;
+};
 
 const summary = computed(() => {
   const tasksTotal = data.value.length;
@@ -98,37 +98,21 @@ const summary = computed(() => {
     <p>Dokončeno: {{ summary.tasksFinished }}</p>
   </div>
 
-<div v-if="isModalOpen" class="modal">
-  <div class="modal-content">
-    <h2>Nový úkol</h2>
+  <div v-if="isModalOpen" class="modal">
+    <div class="modal-content">
+      <h2>Nový úkol</h2>
 
-    <!-- název -->
-    <input 
-      v-model="newTaskTitle" 
-      placeholder="Název úkolu"
-    />
+      <input v-model="newTaskTitle" placeholder="Název úkolu" />
 
-    <!-- priority -->
-    <div>
-      <label>
-        <input type="radio" value="low" v-model="newTaskPriority" />
-        Nízká
-      </label>
+      <div>
+        <label v-for="(key, val) in priorityOrder">
+          <input type="radio" :value="val" v-model="newTaskPriority" />
+          {{ val }}
+        </label>
+      </div>
 
-      <label>
-        <input type="radio" value="normal" v-model="newTaskPriority" />
-        Normální
-      </label>
-
-      <label>
-        <input type="radio" value="high" v-model="newTaskPriority" />
-        Vysoká
-      </label>
+      <button @click="addTask">Přidat</button>
+      <button @click="isModalOpen = false">Zrušit</button>
     </div>
-
-    <!-- akce -->
-    <button @click="addTask">Přidat</button>
-    <button @click="isModalOpen = false">Zrušit</button>
   </div>
-</div>
 </template>
