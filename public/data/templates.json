@@ -1,0 +1,26 @@
+[
+  {
+    "id": "template-1",
+    "title": "Revize kódu",
+    "defaults": {
+      "title": "Zkontrolovat pull request",
+      "priority": "high"
+    }
+  },
+  {
+    "id": "template-2",
+    "title": "Opravit chybu",
+    "defaults": {
+      "title": "Opravit kritickou chybu",
+      "priority": "high"
+    }
+  },
+  {
+    "id": "template-3",
+    "title": "Naplánovat schůzku",
+    "defaults": {
+      "title": "Naplánovat týmovou schůzku",
+      "priority": "normal"
+    }
+  }
+]

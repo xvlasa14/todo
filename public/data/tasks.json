@@ -1,0 +1,7 @@
+[
+  { "id": 1, "title": "Zkontrolovat pull request", "status": "planned", "priority": "low" },
+  { "id": 2, "title": "Naplánovat týmovou schůzku", "status": "planned", "priority": "normal" },
+  { "id": 3, "title": "Archivovat staré projektové soubory", "status": "finished", "priority": "low" },
+  { "id": 4, "title": "Navrhnout čtvrtletní zprávu", "status": "planned", "priority": "normal" },
+  { "id": 5, "title": "Zaškolit nového zaměstnance", "status": "finished", "priority": "high" }
+]
