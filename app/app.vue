@@ -118,10 +118,20 @@ watch(templateId, (newId) => {
         <p>Stav: {{ task.status }}</p>
 
         <div class="flex flex-row gap-3 my-3 justify-end">
-                <button class="bg-stone-50 hover:bg-stone-100 px-2 py-1 text-zinc-900 rounded-sm border border-stone-300 hover:border-stone-500 mr-auto" v-if="task.status === 'planned'" @click="completeTask(task.id)">Dokončit</button>
+          <button
+            class="bg-stone-50 hover:bg-stone-100 px-2 py-1 text-zinc-900 rounded-sm border border-stone-300 hover:border-stone-500 mr-auto"
+            v-if="task.status === 'planned'"
+            @click="completeTask(task.id)"
+          >
+            Dokončit
+          </button>
 
-        <button class="underline px-2 py-1 text-zinc-900 hover:text-zinc-500" @click="deleteTask(task.id)">Odstranit</button>
-  
+          <button
+            class="underline px-2 py-1 text-zinc-900 hover:text-zinc-500"
+            @click="deleteTask(task.id)"
+          >
+            Odstranit
+          </button>
         </div>
       </div>
     </div>
@@ -131,40 +141,53 @@ watch(templateId, (newId) => {
   </div>
 
   <Teleport to="#teleports">
-    <div v-if="isModalOpen" class="absolute size-full top-1 flex m-auto bg-slate-500/60 overflow-hidden">
+    <div
+      v-if="isModalOpen"
+      class="absolute size-full top-1 flex m-auto bg-slate-500/60 overflow-hidden"
+    >
       <div class="w-2/5 h-2/5 p-10 bg-slate-200 m-auto">
         <h2 class="text-2xl text-center">Nový úkol</h2>
         <div class="flex flex-col gap-1 my-2">
-<h3 class="font-semibold">Šablona</h3>
-        <select v-model="templateId" class="bg-slate-50 px-1 py-1">
-          <option disabled value="">-- žádná šablona --</option>
-          <option
-            v-for="template in templatesData"
-            :key="template.id"
-            :value="template.id"
-          >
-            {{ template.title }}
-          </option>
-        </select>
+          <h3 class="font-semibold">Šablona</h3>
+          <select v-model="templateId" class="bg-slate-50 px-1 py-1">
+            <option disabled value="">-- žádná šablona --</option>
+            <option
+              v-for="template in templatesData"
+              :key="template.id"
+              :value="template.id"
+            >
+              {{ template.title }}
+            </option>
+          </select>
         </div>
-        
+
         <div class="flex flex-col gap-1 my-3">
           <h3 class="font-semibold">Název úkolu</h3>
           <input v-model="newTaskTitle" placeholder="Název úkolu" />
         </div>
         <div class="flex flex-col gap-1 my-3">
           <h3 class="font-semibold">Priorita</h3>
-        <div class="flex flex-row gap-3 items-center">
-          <label v-for="(key, val) in priorityOrder">
-            <input type="radio" :value="val" v-model="newTaskPriority" />
-            {{ val }}
-          </label>
+          <div class="flex flex-row gap-3 items-center">
+            <label v-for="(key, val) in priorityOrder">
+              <input type="radio" :value="val" v-model="newTaskPriority" />
+              {{ val }}
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="flex flex-row gap-3 my-3 justify-end">
-        <button class="bg-stone-50 hover:bg-stone-100 px-2 py-1 text-zinc-900 rounded-sm border border-stone-300 hover:border-stone-500 mr-auto" @click="addTask">Přidat</button>
-        <button class="underline px-2 py-1 text-zinc-900 hover:text-zinc-500" @click="isModalOpen = false">Zrušit</button>
-      </div>
+        <div class="flex flex-row gap-3 my-3 justify-end">
+          <button
+            class="bg-stone-50 hover:bg-stone-100 px-2 py-1 text-zinc-900 rounded-sm border border-stone-300 hover:border-stone-500 mr-auto"
+            @click="addTask"
+          >
+            Přidat
+          </button>
+          <button
+            class="underline px-2 py-1 text-zinc-900 hover:text-zinc-500"
+            @click="isModalOpen = false"
+          >
+            Zrušit
+          </button>
+        </div>
       </div>
     </div>
   </Teleport>
